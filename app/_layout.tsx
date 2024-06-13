@@ -1,37 +1,62 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
+import { router, Stack } from "expo-router";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+import React, { useEffect } from "react";
+import "react-native-reanimated";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { StatusBar } from "expo-status-bar";
+import { Colors } from "@/constants/Colors";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet } from "react-native";
+import { Layers } from "@/layers/Layers";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider value={DefaultTheme}>
+			<Layers>
+				<SafeAreaView style={styles.container}>
+					<GestureHandlerRootView>
+						<StatusBar hidden={false} backgroundColor={Colors.primary} />
+						<Stack
+							screenOptions={{
+								headerShown: false,
+								statusBarColor: Colors.django.primary,
+							}}
+						>
+							<Stack.Screen
+								name="index"
+								options={{ statusBarColor: Colors.django.primary }}
+							/>
+							<Stack.Screen
+								name="settings"
+								options={{
+									statusBarColor: Colors.django.primary,
+									headerShown: true,
+									headerTitleAlign: "center",
+									headerTintColor: Colors.background,
+									headerBackVisible: true,
+									headerTitle: "Settings",
+									headerStyle: {
+										backgroundColor: Colors.django.primary,
+									},
+									headerTitleStyle: {
+										fontWeight: "bold",
+									},
+								}}
+							/>
+							<Stack.Screen name="(auth)" options={{}} />
+							<Stack.Screen name="(tabs)" options={{}} />
+							<Stack.Screen name="+not-found" />
+						</Stack>
+					</GestureHandlerRootView>
+				</SafeAreaView>
+			</Layers>
+		</ThemeProvider>
+	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
+});
