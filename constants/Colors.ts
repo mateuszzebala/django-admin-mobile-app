@@ -6,6 +6,7 @@
 export const Colors = {
   background: "#ffffff",
   primary: "#000000",
+  grey: "#e6e6e6",
   django: {
     primary: "#44B78B",
     primaryAccent: "#93D7B7",
@@ -16,5 +17,5 @@ export const Colors = {
     background: "#fafafa",
     borderColor: "#93D7B7",
     color: "#000000"
-  }
+  },
 };

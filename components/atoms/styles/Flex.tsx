@@ -8,6 +8,7 @@ type FlexProps = {
 	gap?: number;
 	alignItems?: "center" | "flex-start" | "flex-end" | "stretch";
 	style?: any;
+	padding?: number;
 	justifyContent?:
 		| "center"
 		| "flex-start"
@@ -24,12 +25,15 @@ export const Flex = ({
 	alignItems = "stretch",
 	justifyContent = "flex-start",
 	children,
+	padding = 0,
 	style = {},
+	...props
 }: FlexProps) => {
 	if (!row && !column) throw Error("You have to specify row or column prop!");
 
 	return (
 		<View
+			{...props}
 			style={[
 				{
 					display: "flex",
@@ -37,6 +41,7 @@ export const Flex = ({
 					gap,
 					alignItems,
 					justifyContent,
+					padding,
 				},
 				style,
 			]}

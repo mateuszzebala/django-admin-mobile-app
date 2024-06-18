@@ -1,6 +1,9 @@
 import { Colors } from "@/constants/Colors";
+import { getBestContrastColor } from "@/utils/themeUtils";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import {
+	Keyboard,
 	Pressable,
 	StyleSheet,
 	Text,
@@ -9,20 +12,11 @@ import {
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
-type CustomInputProps = {
+type SearchInputProps = {
 	placeHolder?: string;
-	value?: string;
-	password?: boolean;
-	onChange?: ({ nativeEvent }: { nativeEvent: any }) => void;
 };
 
-export const CustomInput = ({
-	placeHolder = "",
-	value,
-	password = false,
-	onChange = () => {},
-	...props
-}: CustomInputProps) => {
+export const SearchInput = ({ placeHolder }: SearchInputProps) => {
 	const inputRef: any = React.useRef();
 
 	const handleFocusInput = () => {
@@ -32,34 +26,38 @@ export const CustomInput = ({
 	return (
 		<TouchableOpacity
 			activeOpacity={0.5}
+			style={styles.wrapper}
 			onPress={handleFocusInput}
-			style={styles.inputWrapper}
 		>
+			<Feather
+				style={styles.icon}
+				name="search"
+				size={25}
+				color={Colors.primary}
+			/>
 			<TextInput
-				cursorColor={Colors.primary}
-				ref={inputRef}
-				onChange={onChange}
 				style={styles.input}
+				ref={inputRef}
+				placeholderTextColor={Colors.primary + "44"}
 				placeholder={placeHolder}
-				value={value}
-				secureTextEntry={password}
-				{...props}
 			/>
 		</TouchableOpacity>
 	);
 };
 
 const styles = StyleSheet.create({
-	inputWrapper: {
-		backgroundColor: Colors.input.background,
-		color: Colors.input.color,
-		borderColor: Colors.input.borderColor,
-		borderWidth: 5,
+	wrapper: {
+		backgroundColor: Colors.grey,
+		display: "flex",
+		flexDirection: "row",
+		padding: 12,
+		alignItems: "center",
+		justifyContent: "flex-start",
 		borderRadius: 10,
-		padding: 0,
+		gap: 10,
 	},
+	icon: {},
 	input: {
-		padding: 15,
-		fontSize: 20,
+		fontSize: 21,
 	},
 });

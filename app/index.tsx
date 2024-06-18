@@ -29,8 +29,11 @@ export default function HomeScreen() {
 				<Text style={styles.descriptionText}>
 					Just connect and manage your app!
 				</Text>
+				<Link href={"/help"} style={styles.link}>
+					Click here if you don't know how to start.
+				</Link>
 			</Flex>
-			{connectionContext.isConnected ? (
+			{connectionContext?.isConnected ? (
 				<Flex column gap={20} alignItems="center">
 					<CustomButton
 						style={styles.connectButton}
@@ -95,5 +98,7 @@ const styles = StyleSheet.create({
 	link: {
 		fontWeight: "bold",
 		fontSize: 15,
+		textDecorationStyle: "solid",
+		textDecorationLine: "underline",
 	},
 });

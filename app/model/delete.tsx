@@ -1,5 +1,5 @@
 import { View } from "react-native";
 
-export default function SettingsScreen() {
+export default function ModelDeleteScreen() {
 	return <View />;
 }

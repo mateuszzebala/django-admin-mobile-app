@@ -25,10 +25,11 @@ export default function TabLayout() {
 					return (
 						<TopBarButton
 							icon="arrow-left"
-							onPress={() => router.navigate("/")}
+							onPress={() => router.navigate("/models")}
 						/>
 					);
 				},
+
 				tabBarStyle: {
 					display: "flex",
 					justifyContent: "center",
@@ -42,36 +43,38 @@ export default function TabLayout() {
 			}}
 		>
 			<Tabs.Screen
-				name="models"
+				name="search"
 				options={{
-					title: "Models",
-					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon
-							name={focused ? "home" : "home-outline"}
-							color={color}
-						/>
+					title: "Search",
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon feather name={"search"} color={color} />
 					),
 				}}
 			/>
 			<Tabs.Screen
-				name="history"
+				name="create"
 				options={{
-					title: "History",
-					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon materialIcons name={"history"} color={color} />
+					title: "Create",
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon feather name={"plus"} color={color} />
 					),
 				}}
 			/>
-
 			<Tabs.Screen
-				name="profile"
+				name="update"
 				options={{
-					title: "Profile",
-					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon
-							name={focused ? "person-circle" : "person-circle-outline"}
-							color={color}
-						/>
+					title: "Update",
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon feather name={"edit"} color={color} />
+					),
+				}}
+			/>
+			<Tabs.Screen
+				name="delete"
+				options={{
+					title: "Delete",
+					tabBarIcon: ({ color }) => (
+						<TabBarIcon feather name={"trash"} color={color} />
 					),
 				}}
 			/>

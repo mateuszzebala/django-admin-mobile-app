@@ -28,14 +28,14 @@ export default function RootLayout() {
 								options={{ statusBarColor: Colors.django.primary }}
 							/>
 							<Stack.Screen
-								name="settings"
+								name="help"
 								options={{
 									statusBarColor: Colors.django.primary,
 									headerShown: true,
 									headerTitleAlign: "center",
 									headerTintColor: Colors.background,
 									headerBackVisible: true,
-									headerTitle: "Settings",
+									headerTitle: "Help",
 									headerStyle: {
 										backgroundColor: Colors.django.primary,
 									},
