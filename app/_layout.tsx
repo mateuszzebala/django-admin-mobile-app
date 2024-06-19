@@ -12,10 +12,10 @@ import { Layers } from "@/layers/Layers";
 
 export default function RootLayout() {
 	return (
-		<ThemeProvider value={DefaultTheme}>
-			<Layers>
-				<SafeAreaView style={styles.container}>
-					<GestureHandlerRootView>
+		<GestureHandlerRootView>
+			<ThemeProvider value={DefaultTheme}>
+				<Layers>
+					<SafeAreaView style={styles.container}>
 						<StatusBar hidden={false} backgroundColor={Colors.primary} />
 						<Stack
 							screenOptions={{
@@ -48,10 +48,10 @@ export default function RootLayout() {
 							<Stack.Screen name="(tabs)" options={{}} />
 							<Stack.Screen name="+not-found" />
 						</Stack>
-					</GestureHandlerRootView>
-				</SafeAreaView>
-			</Layers>
-		</ThemeProvider>
+					</SafeAreaView>
+				</Layers>
+			</ThemeProvider>
+		</GestureHandlerRootView>
 	);
 }
 

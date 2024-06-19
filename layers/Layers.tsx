@@ -3,8 +3,9 @@ import { ReactElement } from "react";
 import { ContextLayer } from "./ContextLayer";
 import { AuthLayer } from "./AuthLayer";
 import { FontLayer } from "./FontLayer";
+import { FloatingButtonLayer } from "./FloatingButtonLayer";
 
-const layers: any[] = [ContextLayer, AuthLayer, FontLayer];
+const layers: any[] = [ContextLayer, AuthLayer, FontLayer, FloatingButtonLayer];
 
 export type LayerProps = {
 	next: any;

@@ -1,12 +1,10 @@
-import { router, Stack, Tabs } from "expo-router";
+import { router, Stack, useGlobalSearchParams } from "expo-router";
 import React from "react";
-import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { TopBarButton } from "@/components/navigation/TopBarButton";
-import { DrawerLayoutAndroid } from "react-native-gesture-handler";
-import { StyleSheet, Text } from "react-native";
 
 export default function TabLayout() {
+	const { app, modelName } = useGlobalSearchParams();
 	return (
 		<Stack
 			screenOptions={{
@@ -23,23 +21,20 @@ export default function TabLayout() {
 					return (
 						<TopBarButton
 							icon="arrow-left"
-							onPress={() => router.navigate("/models")}
+							onPress={() =>
+								router.navigate(
+									`/model/search?modelName=${modelName}&app=${app}`
+								)
+							}
 						/>
 					);
 				},
 			}}
 		>
 			<Stack.Screen
-				name="search"
+				name="item"
 				options={{
-					title: "Search",
-					headerRight: () => <TopBarButton icon={"help-circle"} />,
-				}}
-			/>
-			<Stack.Screen
-				name="create"
-				options={{
-					title: "Create",
+					title: "Item",
 				}}
 			/>
 		</Stack>

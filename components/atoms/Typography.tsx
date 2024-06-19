@@ -1,8 +1,9 @@
 import { Colors } from "@/constants/Colors";
+import { ReactElement } from "react";
 import { Text } from "react-native";
 
 type TypographyProps = {
-	children?: string;
+	children?: any;
 	fontSize?: number;
 	fontWeight?: any;
 	color?: string;

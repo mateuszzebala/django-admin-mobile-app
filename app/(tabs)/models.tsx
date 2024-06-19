@@ -1,11 +1,20 @@
 import { Flex } from "@/components/atoms/styles/Flex";
+import { Typography } from "@/components/atoms/Typography";
 import { AppModelsGroup } from "@/components/models/AppModelsGroup";
-import { ScrollView } from "react-native";
+import { Colors } from "@/constants/Colors";
+import { ScrollView, Text } from "react-native";
 
 export default function ModelsScreen() {
 	return (
 		<ScrollView>
 			<Flex column padding={20} gap={20}>
+				<Typography
+					fontSize={20}
+					fontWeight={"bold"}
+					color={Colors.primary + "88"}
+				>
+					Site administration
+				</Typography>
 				<AppModelsGroup
 					app={{
 						models: [

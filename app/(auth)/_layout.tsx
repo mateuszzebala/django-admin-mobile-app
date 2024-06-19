@@ -19,8 +19,8 @@ export default function AuthLayout() {
 								backgroundColor: Colors.django.primary,
 							},
 							headerTintColor: Colors.background,
-							headerBackTitle: "Connenct",
-							headerTitle: "Connect To The Server",
+							headerBackTitle: "Connect",
+							headerTitle: "Connect",
 							headerShown: true,
 							animationDuration: 2000,
 							headerTitleStyle: {

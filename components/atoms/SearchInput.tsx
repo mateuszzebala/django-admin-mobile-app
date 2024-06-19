@@ -32,7 +32,7 @@ export const SearchInput = ({ placeHolder }: SearchInputProps) => {
 			<Feather
 				style={styles.icon}
 				name="search"
-				size={25}
+				size={20}
 				color={Colors.primary}
 			/>
 			<TextInput
@@ -40,6 +40,7 @@ export const SearchInput = ({ placeHolder }: SearchInputProps) => {
 				ref={inputRef}
 				placeholderTextColor={Colors.primary + "44"}
 				placeholder={placeHolder}
+				cursorColor={Colors.primary}
 			/>
 		</TouchableOpacity>
 	);
@@ -58,6 +59,6 @@ const styles = StyleSheet.create({
 	},
 	icon: {},
 	input: {
-		fontSize: 21,
+		fontSize: 17,
 	},
 });

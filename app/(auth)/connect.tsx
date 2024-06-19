@@ -1,6 +1,7 @@
 import { CustomButton } from "@/components/atoms/CustomButton";
 import { CustomInput } from "@/components/atoms/CustomInput";
 import { Colors } from "@/constants/Colors";
+import useLoading from "@/hooks/useLoading";
 import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
@@ -10,30 +11,30 @@ export default function ConnectScreen() {
 		host: "imac:7777",
 		password: "admin123",
 	});
-	const [connecting, setConnecting] = React.useState(false);
+
+	const connecting = useLoading(false);
 
 	const handleConnect = () => {
-		setConnecting(true);
-		fetch(
-			`http://${form.host}/adminapi?username=${form.username}&password=${form.password}`
-		)
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data);
-				setConnecting(false);
-			})
-			.catch((data) => {
-				setConnecting(false);
-			});
+		connecting.enable();
+
+		setTimeout(() => {
+			fetch(
+				`http://${form.host}/adminapi?username=${form.username}&password=${form.password}`
+			)
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(data);
+					connecting.disable();
+				})
+				.catch((data) => {
+					connecting.disable();
+				});
+		}, 1000);
 	};
 
 	return (
 		<ScrollView style={styles.scroll}>
 			<View style={styles.wrapper}>
-				<Image
-					source={require("@/assets/images/djangoLogo.png")}
-					style={styles.djangoImage}
-				/>
 				<View style={styles.form}>
 					<Text>Connect to api of django admin.</Text>
 					<CustomInput
@@ -70,7 +71,7 @@ export default function ConnectScreen() {
 						placeHolder="Password"
 					/>
 					<Text>Password for user account.</Text>
-					<CustomButton isLoading={connecting} onPress={handleConnect}>
+					<CustomButton isLoading={connecting.is} onPress={handleConnect}>
 						Connect
 					</CustomButton>
 				</View>

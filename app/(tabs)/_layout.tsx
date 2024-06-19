@@ -10,9 +10,7 @@ export default function TabLayout() {
 	return (
 		<Tabs
 			screenOptions={{
-				tabBarActiveTintColor: Colors.django.primary,
 				headerShown: true,
-				tabBarShowLabel: false,
 				headerStyle: {
 					backgroundColor: Colors.django.primary,
 				},
@@ -29,6 +27,8 @@ export default function TabLayout() {
 						/>
 					);
 				},
+				tabBarActiveTintColor: Colors.django.primary,
+				tabBarShowLabel: false,
 				tabBarStyle: {
 					display: "flex",
 					justifyContent: "center",
@@ -56,7 +56,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="history"
 				options={{
-					title: "History",
+					title: "Recent Actions",
 					tabBarIcon: ({ color, focused }) => (
 						<TabBarIcon materialIcons name={"history"} color={color} />
 					),

@@ -51,10 +51,8 @@ export const CustomInput = ({
 
 const styles = StyleSheet.create({
 	inputWrapper: {
-		backgroundColor: Colors.input.background,
+		backgroundColor: Colors.grey,
 		color: Colors.input.color,
-		borderColor: Colors.input.borderColor,
-		borderWidth: 5,
 		borderRadius: 10,
 		padding: 0,
 	},

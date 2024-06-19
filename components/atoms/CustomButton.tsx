@@ -10,6 +10,7 @@ import Animated, {
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated";
+import { Loading } from "./Loading";
 
 type CustomButtonProps = {
 	children?: string;
@@ -30,27 +31,6 @@ export const CustomButton = ({
 	style = {},
 	...props
 }: CustomButtonProps) => {
-	const rotateLoadingAngle = useSharedValue<number>(0);
-
-	const animatedStylesForLoadingIcon = useAnimatedStyle(() => ({
-		transform: [{ rotate: `${rotateLoadingAngle.value}deg` }],
-	}));
-
-	const rotateIcon = () => {
-		rotateLoadingAngle.value = withTiming(rotateLoadingAngle.value + 360, {
-			duration: 1000,
-			easing: Easing.linear,
-		});
-	};
-
-	React.useEffect(() => {
-		rotateIcon();
-		const interval = setInterval(rotateIcon, 1000);
-		return () => {
-			clearInterval(interval);
-		};
-	}, [isLoading]);
-
 	return (
 		<TouchableOpacity
 			style={[
@@ -63,11 +43,7 @@ export const CustomButton = ({
 			disabled={isLoading}
 			{...props}
 		>
-			<Animated.View style={[styles.loadingIcon, animatedStylesForLoadingIcon]}>
-				{isLoading && (
-					<MaterialCommunityIcons name="loading" size={32} color="black" />
-				)}
-			</Animated.View>
+			{isLoading && <Loading />}
 			{!isLoading && (
 				<View style={styles.buttonContent}>
 					{iconPosition == "left" && icon}

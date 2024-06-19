@@ -55,7 +55,7 @@ export const AppModelsGroup = ({
 							key={model.name}
 							style={styles.model}
 						>
-							<FontAwesome style={{ width: 30 }} size={20} name={model.icon} />
+							<FontAwesome style={{ width: 30 }} size={16} name={model.icon} />
 							<Text style={styles.modelLink}>{model.name}</Text>
 						</TouchableOpacity>
 					))}
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 	},
 	appNameText: {
 		fontWeight: "bold",
-		fontSize: 20,
+		fontSize: 15,
 		color: Colors.background,
 	},
 	modelsWrapper: {
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 	},
 	modelLink: {
 		fontWeight: "bold",
-		fontSize: 18,
+		fontSize: 15,
 	},
 	model: {
 		display: "flex",
