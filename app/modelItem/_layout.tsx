@@ -17,18 +17,15 @@ export default function TabLayout() {
 				headerTitleStyle: {
 					fontWeight: "bold",
 				},
-				headerLeft: () => {
-					return (
-						<TopBarButton
-							icon="arrow-left"
-							onPress={() =>
-								router.navigate(
-									`/model/search?modelName=${modelName}&app=${app}`
-								)
-							}
-						/>
-					);
-				},
+				headerRight: () => <TopBarButton icon="save" onPress={() => {}} />,
+				headerLeft: () => (
+					<TopBarButton
+						icon="arrow-left"
+						onPress={() =>
+							router.navigate(`/model/search?modelName=${modelName}&app=${app}`)
+						}
+					/>
+				),
 			}}
 		>
 			<Stack.Screen

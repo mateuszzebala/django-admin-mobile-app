@@ -11,9 +11,9 @@ export default function ModelsScreen() {
 				<Typography
 					fontSize={20}
 					fontWeight={"bold"}
-					color={Colors.primary + "88"}
+					color={Colors.primary + "ff"}
 				>
-					Site administration
+					Site administration - domain.pl
 				</Typography>
 				<AppModelsGroup
 					app={{

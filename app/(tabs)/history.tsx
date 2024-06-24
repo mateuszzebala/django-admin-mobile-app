@@ -1,15 +1,31 @@
-import { Loading } from "@/components/atoms/Loading";
+import { CustomButton } from "@/components/atoms/CustomButton";
 import { Flex } from "@/components/atoms/styles/Flex";
-import useLoading from "@/hooks/useLoading";
+import { PromptModalForm } from "@/components/modalForms/PromptModalForm";
+import { useModal } from "@/context/ModelContext";
 import React from "react";
-import { StyleSheet } from "react-native";
 
 export default function HistoryScreen() {
+	const modal = useModal();
+	const [text, setText] = React.useState("");
 	return (
 		<Flex column padding={10}>
-			<Loading size={1} duration={1000} />
+			<CustomButton
+				onPress={() =>
+					modal.create({
+						text: "Select Username",
+						component: PromptModalForm,
+						props: {
+							placeHolder: "Username",
+							initValue: text,
+						},
+						todo: (value: string) => {
+							setText(value);
+						},
+					})
+				}
+			>
+				{text ? <>Your username is {text}!</> : <>Select your username!</>}
+			</CustomButton>
 		</Flex>
 	);
 }
-
-const styles = StyleSheet.create({});

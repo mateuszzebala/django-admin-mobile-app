@@ -13,13 +13,15 @@ import Animated, {
 import { Loading } from "./Loading";
 
 type CustomButtonProps = {
-	children?: string;
+	children?: string | ReactElement;
 	isLoading?: boolean;
 	backgroundColor?: string;
 	icon?: ReactElement | null;
 	iconPosition?: "left" | "right";
 	style?: any;
 	onPress?: () => void;
+	onLayout?: (event: any) => void;
+	secondary?: boolean;
 };
 
 export const CustomButton = ({
@@ -29,15 +31,21 @@ export const CustomButton = ({
 	icon = null,
 	iconPosition = "left",
 	style = {},
+	secondary = false,
 	...props
 }: CustomButtonProps) => {
 	return (
 		<TouchableOpacity
 			style={[
-				styles.button,
-				{
-					backgroundColor,
-				},
+				secondary ? styles.secondaryButton : styles.button,
+				secondary
+					? {
+							borderColor: backgroundColor,
+							backgroundColor: Colors.background,
+					  }
+					: {
+							backgroundColor,
+					  },
 				style,
 			]}
 			disabled={isLoading}
@@ -47,19 +55,21 @@ export const CustomButton = ({
 			{!isLoading && (
 				<View style={styles.buttonContent}>
 					{iconPosition == "left" && icon}
-					<Text
-						style={[
-							styles.text,
-							{
-								color: getBestContrastColor(backgroundColor, [
-									Colors.background,
-									Colors.primary,
-								]),
-							},
-						]}
-					>
-						{children}
-					</Text>
+					{children && (
+						<Text
+							style={[
+								styles.text,
+								{
+									color: getBestContrastColor(backgroundColor, [
+										Colors.background,
+										Colors.primary,
+									]),
+								},
+							]}
+						>
+							{children}
+						</Text>
+					)}
 					{iconPosition == "right" && icon}
 				</View>
 			)}
@@ -76,6 +86,16 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		height: 70,
 		justifyContent: "center",
+	},
+	secondaryButton: {
+		padding: 15,
+		borderRadius: 10,
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		height: 70,
+		justifyContent: "center",
+		borderWidth: 3,
 	},
 	buttonContent: {
 		display: "flex",

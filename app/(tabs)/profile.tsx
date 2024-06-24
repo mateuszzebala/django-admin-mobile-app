@@ -1,5 +1,6 @@
 import { CustomButton } from "@/components/atoms/CustomButton";
 import { Flex } from "@/components/atoms/styles/Flex";
+import { Colors } from "@/constants/Colors";
 import { ConnectionContext } from "@/context/ConnectionContext";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
@@ -29,7 +30,9 @@ export default function ProfileScreen() {
 					</Text>
 					<Text style={styles.email}>{connectionContext.current.email}</Text>
 				</Flex>
-				<CustomButton style={{ width: 300 }}>DISCONNECT</CustomButton>
+				<CustomButton secondary style={{ width: 300 }}>
+					DISCONNECT
+				</CustomButton>
 			</Flex>
 		</View>
 	);
@@ -52,8 +55,8 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 	},
 	django: {
-		height: 100,
-		width: 100,
+		height: 200,
+		width: 200,
 		resizeMode: "contain",
 	},
 	host: {

@@ -1,6 +1,7 @@
 import { Code } from "@/components/atoms/Code";
 import { Flex } from "@/components/atoms/styles/Flex";
 import { Typography } from "@/components/atoms/Typography";
+import { Link } from "expo-router";
 
 export default function HelpScreen() {
 	return (
@@ -35,6 +36,16 @@ export default function HelpScreen() {
 			</Typography>
 			<Code copyOnPress>python manage.py migrate</Code>
 			<Typography fontSize={20}>5. Done.</Typography>
+			<Link
+				style={{
+					fontSize: 20,
+					fontWeight: "bold",
+					textDecorationLine: "underline",
+				}}
+				href="/connect"
+			>
+				Click here to connect!
+			</Link>
 		</Flex>
 	);
 }

@@ -7,7 +7,7 @@ export const AuthLayer = ({ next }: LayerProps) => {
 	const [connectionContext] = React.useContext(ConnectionContext);
 
 	React.useEffect(() => {
-		if (!connectionContext?.isConnected) router.navigate("/connect");
+		//if (!connectionContext?.isConnected) router.navigate("/connect");
 	}, []);
 
 	return <>{next}</>;

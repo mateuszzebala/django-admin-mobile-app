@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 	appName: {
 		backgroundColor: Colors.django.primary,
 		padding: 15,
-		borderRadius: 5,
+		borderRadius: 10,
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "space-between",
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		gap: 10,
 		alignItems: "center",
-		borderRadius: 5,
+		borderRadius: 10,
 		padding: 17,
 		backgroundColor: Colors.primary + "11",
 	},

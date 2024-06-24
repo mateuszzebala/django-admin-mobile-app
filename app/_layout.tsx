@@ -16,7 +16,7 @@ export default function RootLayout() {
 			<ThemeProvider value={DefaultTheme}>
 				<Layers>
 					<SafeAreaView style={styles.container}>
-						<StatusBar hidden={false} backgroundColor={Colors.primary} />
+						<StatusBar hidden={false} backgroundColor={Colors.django.primary} />
 						<Stack
 							screenOptions={{
 								headerShown: false,

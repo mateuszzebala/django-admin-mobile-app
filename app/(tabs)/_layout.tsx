@@ -19,14 +19,7 @@ export default function TabLayout() {
 				headerTitleStyle: {
 					fontWeight: "bold",
 				},
-				headerLeft: () => {
-					return (
-						<TopBarButton
-							icon="arrow-left"
-							onPress={() => router.navigate("/")}
-						/>
-					);
-				},
+
 				tabBarActiveTintColor: Colors.django.primary,
 				tabBarShowLabel: false,
 				tabBarStyle: {

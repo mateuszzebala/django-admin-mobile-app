@@ -1,25 +1,20 @@
 import { Colors } from "@/constants/Colors";
-import {
-	Dimensions,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Flex } from "../atoms/styles/Flex";
-import React, { ReactElement } from "react";
+import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { Cell, Row, Table, TableWrapper } from "react-native-table-component";
 import { FontAwesome } from "@expo/vector-icons";
-import useToggle from "@/hooks/useToggle";
 import { router } from "expo-router";
+import { Loading } from "../atoms/Loading";
+import useListState from "@/hooks/useListState";
 
 type ItemsTableProps = {
-	title: string;
 	items: any[];
 	headers: string[];
 	modelName?: any;
 	app?: any;
+	selected?: any;
 	asc: {
 		value: boolean;
 		setValue: (value: boolean) => void;
@@ -31,12 +26,12 @@ type ItemsTableProps = {
 
 export const ItemsTable = ({
 	headers,
-	title,
 	items,
 	asc,
 	orderBy,
 	modelName,
 	app,
+	selected,
 	setOrderBy,
 }: ItemsTableProps) => {
 	const [widthArr, setWidthArr] = React.useState(headers.map(() => 130));
@@ -48,14 +43,22 @@ export const ItemsTable = ({
 		}
 	};
 
+	const handleScroll = ({
+		nativeEvent: { contentOffset, layoutMeasurement },
+	}: any) => {
+		if (contentOffset.y > layoutMeasurement.height) {
+			// alert("END");
+		}
+	};
+
 	return (
 		<View style={styles.container}>
 			<ScrollView
 				onLayout={handleScrollLayout}
 				horizontal={true}
-				style={{ minWidth: "100%" }}
+				style={{ minWidth: "100%", flex: 1 }}
 			>
-				<View>
+				<Flex column gap={0} padding={0} style={{ flex: 1 }}>
 					<Table>
 						<TableWrapper style={styles.header}>
 							{headers.map((header, index) => (
@@ -97,28 +100,33 @@ export const ItemsTable = ({
 							))}
 						</TableWrapper>
 					</Table>
-					<ScrollView style={styles.dataWrapper}>
+					<ScrollView
+						style={styles.dataWrapper}
+						onMomentumScrollEnd={handleScroll}
+					>
 						<Table>
-							{/* {items.map((rowData, index) => (
-								<Row
-									widthArr={widthArr}
-									key={index}
-									data={[...headers.map((header) => rowData[header])]}
-									style={[
-										
-									]}
-									textStyle={styles.text}
-								/>
-							))} */}
 							{items.map((rowData, index) => (
 								<TableWrapper
+									key={index}
 									style={{
 										...styles.row,
-										backgroundColor:
-											index % 2 == 1 ? Colors.grey : Colors.background,
+										backgroundColor: selected.includes(rowData.pk)
+											? Colors.django.primaryAccent
+											: index % 2 == 1
+											? Colors.grey
+											: Colors.background,
 									}}
 								>
 									<TouchableOpacity
+										activeOpacity={0.8}
+										onLongPress={() => {
+											if (!selected.includes(rowData.pk)) {
+												selected.push(rowData.pk);
+											} else {
+												selected.remove(rowData.pk);
+											}
+											console.log(selected.items);
+										}}
 										onPress={() =>
 											router.navigate(
 												`/modelItem/item?modelName=${modelName}&app=${app}&pk=${rowData.pk}`
@@ -132,7 +140,14 @@ export const ItemsTable = ({
 												textStyle={styles.text}
 												key={index}
 												data={
-													<Text style={{ textAlign: "center" }}>
+													<Text
+														style={{
+															textAlign: "center",
+															fontWeight: selected.includes(rowData.pk)
+																? "bold"
+																: "light",
+														}}
+													>
 														{rowData[header]}
 													</Text>
 												}
@@ -143,7 +158,7 @@ export const ItemsTable = ({
 							))}
 						</Table>
 					</ScrollView>
-				</View>
+				</Flex>
 			</ScrollView>
 		</View>
 	);
@@ -155,6 +170,7 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		alignItems: "center",
 		justifyContent: "center",
+		flex: 1,
 	},
 	header: {
 		height: 60,
@@ -166,11 +182,14 @@ const styles = StyleSheet.create({
 	},
 	headerText: { textAlign: "center", fontWeight: "bold" },
 	text: { textAlign: "center", fontWeight: "100" },
-	dataWrapper: { marginTop: -1 },
+	dataWrapper: {
+		flex: 1,
+	},
 	row: {
 		display: "flex",
 		flexDirection: "row",
 		minHeight: 55,
 		paddingVertical: 5,
+		margin: 0,
 	},
 });

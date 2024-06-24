@@ -8,6 +8,7 @@ type TypographyProps = {
 	fontWeight?: any;
 	color?: string;
 	fontFamily?: string;
+	style?: object;
 };
 
 export const Typography = ({
@@ -16,8 +17,11 @@ export const Typography = ({
 	fontWeight,
 	fontFamily,
 	color = Colors.primary,
+	style = {},
 }: TypographyProps) => {
 	return (
-		<Text style={{ fontFamily, fontSize, fontWeight, color }}>{children}</Text>
+		<Text style={[{ fontFamily, fontSize, fontWeight, color }, style]}>
+			{children}
+		</Text>
 	);
 };

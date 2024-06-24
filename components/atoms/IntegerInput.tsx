@@ -3,31 +3,34 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
-type CustomInputProps = {
+type IntegerInputProps = {
 	placeHolder?: string;
 	value?: string;
 	password?: boolean;
-	onChange?: ({ nativeEvent }: { nativeEvent: any }) => void;
-	autofocus?: boolean;
+	setValue?: (value: number | string) => void;
 };
 
-export const CustomInput = ({
+export const IntegerInput = ({
 	placeHolder = "",
-	value,
+	value = "",
 	password = false,
-	onChange = () => {},
-	autofocus = false,
+	setValue = () => {},
 	...props
-}: CustomInputProps) => {
+}: IntegerInputProps) => {
+	const [val, setVal] = React.useState<number | string>(value);
 	const inputRef: any = React.useRef();
+
+	React.useEffect(() => {
+		setValue(val);
+	}, [val]);
+
+	React.useEffect(() => {
+		if (val != value) setVal(value);
+	}, [value]);
 
 	const handleFocusInput = () => {
 		inputRef.current.focus();
 	};
-
-	React.useEffect(() => {
-		if (autofocus) handleFocusInput();
-	}, [autofocus]);
 
 	return (
 		<TouchableOpacity
@@ -38,11 +41,14 @@ export const CustomInput = ({
 			<TextInput
 				cursorColor={Colors.primary}
 				ref={inputRef}
-				onChange={onChange}
+				onChangeText={(value) => {
+					setVal(parseInt(value) || "");
+				}}
 				style={styles.input}
 				placeholder={placeHolder}
-				value={value}
+				value={String(val)}
 				secureTextEntry={password}
+				keyboardType="numeric"
 				{...props}
 			/>
 		</TouchableOpacity>

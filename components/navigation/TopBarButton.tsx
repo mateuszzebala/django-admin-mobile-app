@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 type TopBarButtonProps = {
-	icon: "menu" | "help-circle" | "arrow-left";
+	icon: "menu" | "help-circle" | "arrow-left" | "save";
 	onPress?: () => void;
 };
 
