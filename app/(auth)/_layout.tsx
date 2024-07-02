@@ -10,7 +10,7 @@ export default function AuthLayout() {
 	return (
 		<SafeAreaView style={styles.container}>
 			<GestureHandlerRootView style={styles.container}>
-				<StatusBar hidden={false} backgroundColor={Colors.primary} />
+				<StatusBar hidden={false} backgroundColor={Colors.django.primary} />
 				<Stack screenOptions={{ statusBarColor: Colors.django.primary }}>
 					<Stack.Screen
 						name="connect"
@@ -21,6 +21,23 @@ export default function AuthLayout() {
 							headerTintColor: Colors.background,
 							headerBackTitle: "Connect",
 							headerTitle: "Connect",
+							headerShown: true,
+							animationDuration: 2000,
+							headerTitleStyle: {
+								fontWeight: "bold",
+								color: Colors.background,
+							},
+						}}
+					/>
+					<Stack.Screen
+						name="connections"
+						options={{
+							headerStyle: {
+								backgroundColor: Colors.django.primary,
+							},
+							headerTintColor: Colors.background,
+							headerBackTitle: "My Connections",
+							headerTitle: "My Connections",
 							headerShown: true,
 							animationDuration: 2000,
 							headerTitleStyle: {

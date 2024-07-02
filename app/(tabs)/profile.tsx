@@ -1,12 +1,22 @@
 import { CustomButton } from "@/components/atoms/CustomButton";
+import { Loading } from "@/components/atoms/Loading";
 import { Flex } from "@/components/atoms/styles/Flex";
 import { Colors } from "@/constants/Colors";
-import { ConnectionContext } from "@/context/ConnectionContext";
+import useConnnection from "@/hooks/useConnnection";
+import useFetch from "@/hooks/useFetch";
+import axios from "axios";
+import { router } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 
 export default function ProfileScreen() {
-	const [connectionContext] = React.useContext(ConnectionContext);
+	const connection = useConnnection();
+	const data = useFetch(
+		{ user: {} },
+		`${connection.current.host}/api_admin/user_info/`,
+		[connection.current.host]
+	);
+
 	return (
 		<View style={styles.container}>
 			<Flex
@@ -20,18 +30,31 @@ export default function ProfileScreen() {
 					style={styles.django}
 				/>
 				<Flex column alignItems="center">
-					<Text style={styles.host}>{connectionContext.current.host}</Text>
-					<Text style={styles.username}>
-						{connectionContext.current.username}
+					<Text style={styles.host}>
+						{connection.connectionContext.current.host}
 					</Text>
-					<Text style={styles.names}>
-						{connectionContext.current.firstName}{" "}
-						{connectionContext.current.lastName}
-					</Text>
-					<Text style={styles.email}>{connectionContext.current.email}</Text>
+					{data.loading ? (
+						<Loading size={2} />
+					) : (
+						<>
+							<Text style={styles.username}>{data.data.user.username}</Text>
+							<Text style={styles.names}>
+								{data.data.user.first_name} {data.data.user.last_name}
+							</Text>
+							<Text style={styles.email}>{data.data?.user.email}</Text>
+						</>
+					)}
 				</Flex>
-				<CustomButton secondary style={{ width: 300 }}>
-					DISCONNECT
+				<CustomButton
+					backgroundColor={Colors.django.primary}
+					onPress={() => {
+						connection.disconnectFromCurrent();
+						router.navigate("/connections");
+					}}
+					secondary
+					style={{ width: 300 }}
+				>
+					Disconnect!
 				</CustomButton>
 			</Flex>
 		</View>

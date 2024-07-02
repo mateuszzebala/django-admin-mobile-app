@@ -2,9 +2,11 @@ import { Flex } from "@/components/atoms/styles/Flex";
 import { Typography } from "@/components/atoms/Typography";
 import { AppModelsGroup } from "@/components/models/AppModelsGroup";
 import { Colors } from "@/constants/Colors";
+import useConnnection from "@/hooks/useConnnection";
 import { ScrollView, Text } from "react-native";
 
 export default function ModelsScreen() {
+	const connection = useConnnection();
 	return (
 		<ScrollView>
 			<Flex column padding={20} gap={20}>
@@ -13,7 +15,14 @@ export default function ModelsScreen() {
 					fontWeight={"bold"}
 					color={Colors.primary + "ff"}
 				>
-					Site administration - domain.pl
+					Site administration - {connection.current.name}
+				</Typography>
+				<Typography
+					fontSize={15}
+					fontWeight={"bold"}
+					color={Colors.primary + "88"}
+				>
+					{connection.current.host}
 				</Typography>
 				<AppModelsGroup
 					app={{

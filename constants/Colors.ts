@@ -8,6 +8,7 @@ export const Colors = {
   primary: "#000000",
   grey: "#e5e5e5",
   error: "#FF6B6B",
+  success: "#41d165",
   django: {
     primary: "#44B78B",
     primaryAccent: "#93D7B7",

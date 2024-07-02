@@ -3,18 +3,18 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
-type CustomInputProps = {
+type TextareaProps = {
 	placeHolder?: string;
 	value?: string;
 	password?: boolean;
 	onChange?: ({ nativeEvent }: { nativeEvent: any }) => void;
 	autofocus?: boolean;
-	style?: object;
+	numberOfLines?: number;
 	wrapperStyle?: object;
-	autoCapitalize?: string;
+	style?: object;
 };
 
-export const CustomInput = ({
+export const Textarea = ({
 	placeHolder = "",
 	value,
 	password = false,
@@ -23,7 +23,7 @@ export const CustomInput = ({
 	style = {},
 	wrapperStyle = {},
 	...props
-}: CustomInputProps) => {
+}: TextareaProps) => {
 	const inputRef: any = React.useRef();
 
 	const handleFocusInput = () => {
@@ -38,13 +38,15 @@ export const CustomInput = ({
 		<TouchableOpacity
 			activeOpacity={0.5}
 			onPress={handleFocusInput}
-			style={[wrapperStyle, styles.inputWrapper]}
+			style={[styles.inputWrapper, wrapperStyle]}
 		>
 			<TextInput
+				multiline
 				cursorColor={Colors.primary}
+				numberOfLines={5}
 				ref={inputRef}
 				onChange={onChange}
-				style={[style, styles.input]}
+				style={[styles.input, style]}
 				placeholder={placeHolder}
 				value={value}
 				secureTextEntry={password}

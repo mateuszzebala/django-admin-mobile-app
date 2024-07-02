@@ -13,7 +13,7 @@ import Animated, {
 import { Loading } from "./Loading";
 
 type CustomButtonProps = {
-	children?: string | ReactElement;
+	children?: string | ReactElement | ReactElement[];
 	isLoading?: boolean;
 	backgroundColor?: string;
 	icon?: ReactElement | null;

@@ -10,32 +10,31 @@ export default function HelpScreen() {
 				Connect Guide
 			</Typography>
 			<Typography fontSize={20}>
-				1. You need to install django-admin-api to your project.
+				1. You need to install django-api-admin to your project.
 			</Typography>
-			<Code copyOnPress>pip install django-admin-api</Code>
+			<Code copyOnPress>pip install django-api-admin</Code>
 			<Typography fontSize={20}>
-				2. Add django-admin-api to applications list.
+				2. Add django-api-admin to applications list.
 			</Typography>
 			<Code copyOnPress>
 				INSTALLED_APPS = [{"\n"}
 				{"    "}...{"\n"}
-				{"    "}'django-admin-api',
+				{"    "}'django.contrib.admin',{"\n"}
+				{"    "}'rest_framework',{"\n"}
+				{"    "}'django_api_admin',
 				{"\n"}
 				{"    "}...
 				{"\n"}]
 			</Code>
-			<Typography fontSize={20}>3. Add django-admin-api urls.</Typography>
+			<Typography fontSize={20}>3. Add django-api-admin urls.</Typography>
 			<Code copyOnPress>
 				urlpatterns = [{"\n"}
 				{"    "}path("admin/", include('admin.site.urls')),{"\n"}
-				{"    "}path("admin-api/", include('admin-api.urls')),{"\n    "}...
+				{"    "}path("api_admin/", include('admin-api.urls')),{"\n    "}...
 				{"\n"}]
 			</Code>
-			<Typography fontSize={20}>
-				4. Make migrations and reload an app.
-			</Typography>
-			<Code copyOnPress>python manage.py migrate</Code>
-			<Typography fontSize={20}>5. Done.</Typography>
+
+			<Typography fontSize={20}>4. Done.</Typography>
 			<Link
 				style={{
 					fontSize: 20,

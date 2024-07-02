@@ -8,6 +8,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { DateTimeField } from "./modelFieldInputs/DateTimeField";
 import { DateField } from "./modelFieldInputs/DateField";
 import { TimeField } from "./modelFieldInputs/TimeField";
+import { TextField } from "./modelFieldInputs/TextField";
+import { ColorField } from "./modelFieldInputs/ColorField";
+import { JSONField } from "./modelFieldInputs/JSONField";
 
 type ModelFieldProps = {
 	type:
@@ -17,7 +20,10 @@ type ModelFieldProps = {
 		| "BooleanField"
 		| "DateTimeField"
 		| "DateField"
-		| "TimeField";
+		| "TimeField"
+		| "TextField"
+		| "ColorField"
+		| "JSONField";
 	name?: string;
 	description?: string;
 	fieldData?: object;
@@ -31,6 +37,9 @@ const fields = {
 	DateTimeField,
 	DateField,
 	TimeField,
+	TextField,
+	ColorField,
+	JSONField,
 };
 
 export const ModelField = ({

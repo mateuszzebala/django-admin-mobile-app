@@ -5,7 +5,7 @@ import { AuthLayer } from "./AuthLayer";
 import { FontLayer } from "./FontLayer";
 import { ModalLayer } from "./ModalLayer";
 
-const layers: any[] = [ContextLayer, AuthLayer, FontLayer, ModalLayer];
+const layers: any[] = [AuthLayer, ContextLayer, FontLayer, ModalLayer];
 
 export type LayerProps = {
 	next: any;

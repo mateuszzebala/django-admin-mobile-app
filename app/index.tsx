@@ -2,13 +2,14 @@ import { CustomButton } from "@/components/atoms/CustomButton";
 import { Flex } from "@/components/atoms/styles/Flex";
 import { Colors } from "@/constants/Colors";
 import { ConnectionContext } from "@/context/ConnectionContext";
-import { FontAwesome } from "@expo/vector-icons";
+import useConnnection from "@/hooks/useConnnection";
+import { Feather, FontAwesome } from "@expo/vector-icons";
 import { Link, router } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text } from "react-native";
 
 export default function HomeScreen() {
-	const [connectionContext] = React.useContext(ConnectionContext);
+	const connection = useConnnection();
 
 	return (
 		<Flex
@@ -32,9 +33,12 @@ export default function HomeScreen() {
 				<Link href={"/help"} style={styles.link}>
 					Click here if you don't know how to start.
 				</Link>
+				<Link href={"/donate"} style={styles.link}>
+					<Feather name={"coffee"} /> Buy me a coffee :)
+				</Link>
 			</Flex>
-			{connectionContext?.isConnected ? (
-				<Flex column gap={20} alignItems="center">
+			{connection.isConnected() ? (
+				<Flex column gap={10} alignItems="center">
 					<CustomButton
 						style={styles.connectButton}
 						icon={<FontAwesome name="arrow-right" size={20} />}
@@ -42,11 +46,23 @@ export default function HomeScreen() {
 						backgroundColor={Colors.background}
 						onPress={() => router.navigate("/models")}
 					>
-						Go To The Server!
+						Go To The {connection?.current?.name}!
 					</CustomButton>
-					<Link style={styles.link} href={"/connect"}>
-						Connect to other server!
-					</Link>
+					<CustomButton
+						style={styles.button}
+						backgroundColor={Colors.django.primaryAccent}
+						onPress={() => router.navigate("/connections")}
+					>
+						My connections
+					</CustomButton>
+
+					<CustomButton
+						style={styles.button}
+						backgroundColor={Colors.django.primaryAccent}
+						onPress={() => router.navigate("/connect")}
+					>
+						Create new connection
+					</CustomButton>
 				</Flex>
 			) : (
 				<>
@@ -57,7 +73,7 @@ export default function HomeScreen() {
 						backgroundColor={Colors.background}
 						onPress={() => router.navigate("/connect")}
 					>
-						Connect To The Server!
+						Create new connection!
 					</CustomButton>
 				</>
 			)}
@@ -68,7 +84,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
 	djangoWhiteImage: {
 		width: 200,
-		height: 50,
+		height: 40,
 		resizeMode: "contain",
 	},
 	wrapper: {
@@ -79,16 +95,16 @@ const styles = StyleSheet.create({
 	},
 	djangoLogo: {
 		width: 400,
-		height: 300,
+		height: 250,
 		resizeMode: "contain",
 	},
 	welcomeText: {
-		fontSize: 35,
+		fontSize: 30,
 		color: Colors.background,
 		fontFamily: "Rubik",
 	},
 	descriptionText: {
-		fontSize: 21,
+		fontSize: 17,
 		fontFamily: "RubikLight",
 		color: Colors.background,
 	},
@@ -100,5 +116,9 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 		textDecorationStyle: "solid",
 		textDecorationLine: "underline",
+	},
+	button: {
+		width: 350,
+		height: 55,
 	},
 });

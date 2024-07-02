@@ -13,44 +13,38 @@ import { Layers } from "@/layers/Layers";
 export default function RootLayout() {
 	return (
 		<GestureHandlerRootView>
-			<ThemeProvider value={DefaultTheme}>
-				<Layers>
-					<SafeAreaView style={styles.container}>
-						<StatusBar hidden={false} backgroundColor={Colors.django.primary} />
-						<Stack
-							screenOptions={{
-								headerShown: false,
-								statusBarColor: Colors.django.primary,
+			<Layers>
+				<SafeAreaView style={styles.container}>
+					<StatusBar hidden={false} backgroundColor={Colors.django.primary} />
+					<Stack
+						screenOptions={{
+							headerShown: false,
+							statusBarColor: Colors.django.primary,
+						}}
+					>
+						<Stack.Screen name="index" />
+						<Stack.Screen
+							name="help"
+							options={{
+								headerShown: true,
+								headerTitleAlign: "center",
+								headerTintColor: Colors.background,
+								headerBackVisible: true,
+								headerTitle: "Help",
+								headerStyle: {
+									backgroundColor: Colors.django.primary,
+								},
+								headerTitleStyle: {
+									fontWeight: "bold",
+								},
 							}}
-						>
-							<Stack.Screen
-								name="index"
-								options={{ statusBarColor: Colors.django.primary }}
-							/>
-							<Stack.Screen
-								name="help"
-								options={{
-									statusBarColor: Colors.django.primary,
-									headerShown: true,
-									headerTitleAlign: "center",
-									headerTintColor: Colors.background,
-									headerBackVisible: true,
-									headerTitle: "Help",
-									headerStyle: {
-										backgroundColor: Colors.django.primary,
-									},
-									headerTitleStyle: {
-										fontWeight: "bold",
-									},
-								}}
-							/>
-							<Stack.Screen name="(auth)" options={{}} />
-							<Stack.Screen name="(tabs)" options={{}} />
-							<Stack.Screen name="+not-found" />
-						</Stack>
-					</SafeAreaView>
-				</Layers>
-			</ThemeProvider>
+						/>
+						<Stack.Screen name="(auth)" options={{}} />
+						<Stack.Screen name="(tabs)" options={{}} />
+						<Stack.Screen name="+not-found" />
+					</Stack>
+				</SafeAreaView>
+			</Layers>
 		</GestureHandlerRootView>
 	);
 }

@@ -1,14 +1,14 @@
-import { ConnectionContext } from "@/context/ConnectionContext";
 import React from "react";
 import { LayerProps } from "./Layers";
+import useConnnection from "@/hooks/useConnnection";
 import { router } from "expo-router";
 
 export const AuthLayer = ({ next }: LayerProps) => {
-	const [connectionContext] = React.useContext(ConnectionContext);
+	const connection = useConnnection();
 
 	React.useEffect(() => {
-		//if (!connectionContext?.isConnected) router.navigate("/connect");
-	}, []);
+		if (!connection.isConnected()) router.navigate("/");
+	}, [connection]);
 
-	return <>{next}</>;
+	return <>{connection.connectionContext && next}</>;
 };
