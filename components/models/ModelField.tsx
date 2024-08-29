@@ -20,6 +20,7 @@ import { Text } from "react-native";
 import { useModal } from "@/context/ModelContext";
 import { FieldPropertiesModalForm } from "../modalForms/FieldPropertiesModalForm";
 import { Flex, Typography } from "../atoms";
+import { Feather } from "@expo/vector-icons";
 
 const fields = {
   CharField,
@@ -106,8 +107,12 @@ export const ModelField = ({
           })
         }
       >
-        <Typography fontWeight={"bold"} fontSize={17}>
-          {name}
+        <Typography
+          fontWeight={"bold"}
+          fontSize={17}
+          style={{ display: "inline-flex", alignItems: "center", gap: 20 }}
+        >
+          <Feather name="more-vertical" /> {name}
         </Typography>
       </TouchableOpacity>
       <Typography fontSize={12}>{type}</Typography>
