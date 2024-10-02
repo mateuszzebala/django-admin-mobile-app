@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import React from "react";
 import useListState from "@/hooks/useListState";
 import { Colors } from "@/constants/Colors";
@@ -8,6 +8,7 @@ import useApi from "@/hooks/useAPI";
 import { actions } from "@/api/actions";
 import { CustomButton, Flex, Typography } from "../atoms";
 import { AutoCompleteResponse } from "@/types";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
 export const SelectItemsModalForm = ({
   modal = {},
@@ -52,14 +53,19 @@ export const SelectItemsModalForm = ({
         </Typography>
       </Flex>
       <ScrollView
-        style={{ height: 500, maxHeight: 500, minWidth: 300 }}
+        style={{
+          height: 500,
+          maxHeight: 500,
+          minWidth: 300,
+        }}
+        scrollEnabled
         onMomentumScrollEnd={() => {
           if (length.value == items.items.length) length.add(20);
         }}
       >
         <Flex column padding={0} gap={5}>
           {items.items.map((item) => (
-            <Pressable
+            <TouchableOpacity
               onPress={() => {
                 selectedItems.toggle(item.pk);
               }}
@@ -76,12 +82,14 @@ export const SelectItemsModalForm = ({
               <Text
                 style={{
                   color: Colors.primary,
+                  maxWidth: 300,
+                  textAlign: "center",
                 }}
               >
                 {item.pk.length < 5 ? item.pk + "." : ""}{" "}
-                {stringEllipsis(item.__str__, 40)}
+                {stringEllipsis(item.__str__, 200)}
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           ))}
         </Flex>
       </ScrollView>

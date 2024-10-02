@@ -13,10 +13,10 @@ export default function ConnectScreen() {
   const connection = useConnection();
 
   const [form, setForm] = React.useState({
+    name: "",
     host: "",
     username: "",
     password: "",
-    name: "",
   });
 
   const [connectionError, setConnectionError] = React.useState("");

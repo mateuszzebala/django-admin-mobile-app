@@ -24,14 +24,7 @@ export default function TabLayout() {
         headerTitleStyle: {
           fontWeight: "bold",
         },
-        headerLeft: () => {
-          return (
-            <TopBarButton
-              icon="arrow-left"
-              onPress={() => router.navigate(ROUTES.MODELS())}
-            />
-          );
-        },
+        headerBackVisible: true,
       }}
     >
       <Stack.Screen
@@ -50,11 +43,6 @@ export default function TabLayout() {
         name="searchHelp"
         options={{
           title: "Help",
-          headerLeft: () => {
-            return (
-              <TopBarButton icon="arrow-left" onPress={() => router.back()} />
-            );
-          },
         }}
       />
     </Stack>

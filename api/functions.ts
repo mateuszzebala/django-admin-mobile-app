@@ -34,34 +34,6 @@ export const tryToConnect = async (
   );
 };
 
-export const FETCH = (
-  path: string[] | any[] = [],
-  connection: any = {},
-  method: string = "GET",
-  data: any = {},
-  options: any = {},
-  searchParams: { [index: string]: string } = {}
-) => {
-  const pth = path.join("/");
-
-  const url: URL = new URL(`${connection.current.host}/admin-api/${pth}`);
-
-  Object.keys(searchParams).map((param) => {
-    url.searchParams.set(param, searchParams[param]);
-  });
-
-  return axios({
-    url: url.href,
-    method: method.toUpperCase(),
-    data: data,
-    withCredentials: true,
-    headers: {
-      Cookie: `sessionid=${connection.current.sessionid}`,
-    },
-    ...options,
-  });
-};
-
 export const buildValidHost = (host: string): string => {
   let validHost = host;
   if (!host.startsWith("http")) {

@@ -13,7 +13,7 @@ const getFormDataValue = (type: DjangoModelFieldType, value: any) => {
   else if (type == "FloatField") return value;
   else if (type == "IntegerField") return value;
   else if (type == "ManyToManyField")
-    return value && value.items ? value.items.join(",") : "";
+    return value ? (value.items ? value.items.join(",") : "") : "";
   else if (type == "OneToOneField") return value.pk || "";
   else if (type == "ForeignKey") return value.pk || "";
   else if (type == "FileField" || type == "ImageField") {

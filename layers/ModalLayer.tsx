@@ -38,8 +38,8 @@ export const ModalLayer = ({ next }: LayerProps) => {
   const [modalData, setModalData] = React.useState(defaultModalContext);
   return (
     <ModalContext.Provider value={[modalData, setModalData]}>
-      <Modals />
       {next}
+      <Modals />
     </ModalContext.Provider>
   );
 };

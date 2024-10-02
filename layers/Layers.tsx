@@ -11,7 +11,7 @@ export type LayerProps = {
 };
 
 type LayersProps = {
-  children: ReactElement;
+  children: any;
 };
 
 export const Layers = ({ children }: LayersProps) => {

@@ -8,17 +8,15 @@ import {
   ModelsResponse,
 } from "@/types";
 import { createFormData } from "./functions";
+import axios from "axios";
 
 const getModels = async (connection: any) => {
-  const data: ModelsResponse = (await connection.fetch([], "GET")).data;
-
+  const data: ModelsResponse = await connection.fetch([], "GET");
   return data;
 };
 
 const getModel = async (connection: any, app: string, modelName: string) => {
-  const data: ModelResponse = (await connection.fetch([app, modelName], "GET"))
-    .data;
-
+  const data: ModelResponse = await connection.fetch([app, modelName], "GET");
   return data;
 };
 
@@ -28,15 +26,13 @@ const getItems = async (
   modelName: string,
   searchParams: any = {}
 ) => {
-  const data: ItemsResponse = (
-    await connection.fetch(
-      [app, modelName, "items"],
-      "GET",
-      {},
-      {},
-      searchParams
-    )
-  ).data;
+  const data: ItemsResponse = await connection.fetch(
+    [app, modelName, "items"],
+    "GET",
+    {},
+    {},
+    searchParams
+  );
 
   return data;
 };
@@ -47,9 +43,10 @@ const getItem = async (
   modelName: string,
   pk: any
 ) => {
-  const data: ItemResponse = (
-    await connection.fetch([app, modelName, pk], "GET")
-  ).data;
+  const data: ItemResponse = await connection.fetch(
+    [app, modelName, pk],
+    "GET"
+  );
 
   return data;
 };
@@ -62,21 +59,19 @@ const getAutoComplete = async (
   fieldName: string,
   searchParams: any = {}
 ) => {
-  const data: AutoCompleteResponse = (
-    await connection.fetch(
-      [app, modelName, ...(pk ? [pk] : []), fieldName, "autocomplete"],
-      "GET",
-      {},
-      {},
-      searchParams
-    )
-  ).data;
+  const data: AutoCompleteResponse = await connection.fetch(
+    [app, modelName, ...(pk ? [pk] : []), fieldName, "autocomplete"],
+    "GET",
+    {},
+    {},
+    searchParams
+  );
 
   return data;
 };
 
 const getLogs = async (connection: any) => {
-  const data: LogsResponse = (await connection.fetch(["logs"], "GET")).data;
+  const data: LogsResponse = await connection.fetch(["logs"], "GET");
 
   return data;
 };
@@ -87,16 +82,14 @@ const createItem = async (
   modelName: string,
   itemData: FormData
 ) => {
-  const data: CreateEditItemResponse = (
-    await connection.fetch(
-      [app, modelName],
-      "POST",
-      itemData,
-      {},
-      {},
-      { "Content-Type": "multipart/form-data" }
-    )
-  ).data;
+  const data: CreateEditItemResponse = await connection.fetch(
+    [app, modelName],
+    "POST",
+    itemData,
+    {},
+    {},
+    { "Content-Type": "multipart/form-data" }
+  );
   return data;
 };
 
@@ -107,16 +100,14 @@ const putItem = async (
   pk: any,
   itemData: FormData
 ) => {
-  const data: CreateEditItemResponse = (
-    await connection.fetch(
-      [app, modelName, pk],
-      "PUT",
-      itemData,
-      {},
-      {},
-      { "Content-Type": "multipart/form-data" }
-    )
-  ).data;
+  const data: CreateEditItemResponse = await connection.fetch(
+    [app, modelName, pk],
+    "PUT",
+    itemData,
+    {},
+    {},
+    { "Content-Type": "multipart/form-data" }
+  );
   return data;
 };
 
@@ -126,17 +117,15 @@ const deleteItems = async (
   modelName: string,
   keys: string
 ) => {
-  const data = (
-    await connection.fetch(
-      [app, modelName, "items"],
-      "DELETE",
-      {},
-      {},
-      {
-        keys,
-      }
-    )
-  ).data;
+  const data = await connection.fetch(
+    [app, modelName, "items"],
+    "DELETE",
+    {},
+    {},
+    {
+      keys,
+    }
+  );
   return data;
 };
 
@@ -147,23 +136,21 @@ const makeAnAction = async (
   actionName: string,
   keys: string
 ) => {
-  const data = (
-    await connection.fetch(
-      [app, modelName, "action", actionName],
-      "POST",
-      createFormData({
-        keys: keys,
-      }),
-      {},
-      {},
-      { "Content-Type": "multipart/form-data" }
-    )
-  ).data;
+  const data = await connection.fetch(
+    [app, modelName, "action", actionName],
+    "POST",
+    createFormData({
+      keys: keys,
+    }),
+    {},
+    {},
+    { "Content-Type": "multipart/form-data" }
+  );
   return data;
 };
 
 const getInfo = async (connection: any) => {
-  const data = (await connection.fetch(["info"], "GET")).data;
+  const data = await connection.fetch(["info"], "GET");
   return data;
 };
 

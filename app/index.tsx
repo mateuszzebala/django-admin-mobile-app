@@ -6,11 +6,14 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { ROUTES } from "./routes";
 import { CustomButton, Flex } from "@/components/atoms";
+import {SafeAreaView} from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const connection = useConnection();
 
   return (
+      <SafeAreaView style={styles.container}>
+
     <Flex
       column
       justifyContent="space-between"
@@ -90,10 +93,15 @@ export default function HomeScreen() {
         </>
       )}
     </Flex>
+      </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.django.primary,
+  },
   djangoWhiteImage: {
     width: 200,
     height: 40,

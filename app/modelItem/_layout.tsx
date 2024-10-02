@@ -26,15 +26,8 @@ export default function TabLayout() {
         headerTitleStyle: {
           fontWeight: "bold",
         },
-        headerRight: () => <></>,
-        headerLeft: () => (
-          <TopBarButton
-            icon="arrow-left"
-            onPress={() =>
-              router.navigate(ROUTES.SEARCH(app + "", modelName + ""))
-            }
-          />
-        ),
+        headerBackVisible: true,
+        headerBackTitle: "Back",
       }}
     >
       <Stack.Screen

@@ -1,4 +1,5 @@
 import useConnnection from "./useConnection";
+import {Axios, AxiosError} from "axios";
 
 type ActionProps = {
   action: (...args: any[]) => Promise<any>;
@@ -14,6 +15,8 @@ export default () => {
     try {
       action(connection, ...args).then((data) => {
         callback(data);
+      }).catch((err: AxiosError) => {
+        error && error()
       });
     } catch {
       alert("API ERROR");

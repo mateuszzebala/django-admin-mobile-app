@@ -94,14 +94,6 @@ export default function ModelCreateScreen() {
   React.useEffect(() => {
     navigation.setOptions({
       title: `New ${modelName}`,
-      headerLeft: () => (
-        <TopBarButton
-          icon="arrow-left"
-          onPress={() =>
-            router.navigate(ROUTES.SEARCH(app + "", modelName + ""))
-          }
-        />
-      ),
     });
   }, [app, modelName]);
 

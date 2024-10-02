@@ -2,12 +2,21 @@ import { ConnectionContext } from "@/context/ConnectionContext";
 import axios from "axios";
 import React from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { instanceOf } from "prop-types";
 
 type Connection = {
   host?: string;
   username?: string;
   password?: string;
   user?: any;
+};
+
+const isObjectEmpty = (objectName: any) => {
+  return (
+    objectName &&
+    Object.keys(objectName).length === 0 &&
+    objectName.constructor === Object
+  );
 };
 
 export default () => {
@@ -55,17 +64,17 @@ export default () => {
           (connection: any, index: number) => index != indexToRemove
         ),
       })),
-    fetch: (
+    fetch: async (
       path: string[] | any[] = [],
       method: string = "GET",
-      data: any = {},
+      data: any = "",
       options: any = {},
       searchParams: { [index: string]: string } = {},
       headers: { [index: string]: string } = {}
     ) => {
       const pth = path.join("/");
       const url: URL = new URL(
-        `${connectionContext?.current.host}/admin-api/${pth}${
+        `${connectionContext?.current.host}/admin-api${pth ? "/" : ""}${pth}${
           method == "GET" ? "" : "/"
         }`
       );
@@ -74,17 +83,29 @@ export default () => {
         url.searchParams.set(param, searchParams[param]);
       });
 
-      return axios({
-        url: url.href,
-        method: method.toUpperCase(),
-        data: data,
-        withCredentials: true,
+      // return axios({
+      //   url: url.href,
+      //   method: method.toUpperCase(),
+      //   data: data,
+      //   withCredentials: true,
+      //   headers: {
+      //     Cookie: `sessionid=${connectionContext?.current.sessionid}`,
+      //     ...headers,
+      //   },
+      //   ...options,
+      // })
+      console.log(data);
+      const _options: RequestInit = {
+        credentials: "include",
         headers: {
-          Cookie: `sessionid=${connectionContext?.current.sessionid}`,
+          Cookie: `;sessionid="${connectionContext?.current.sessionid}";`,
           ...headers,
         },
+        method: method.toUpperCase(),
+        body: isObjectEmpty(data) ? "" : data ? data : "",
         ...options,
-      });
+      };
+      return await fetch(url.href, _options).then((data) => data.json());
     },
   };
 };

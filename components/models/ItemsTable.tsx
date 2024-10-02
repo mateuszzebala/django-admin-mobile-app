@@ -174,8 +174,10 @@ export const ItemsTable = ({
                             width={widthArr[index]}
                             textStyle={styles.text}
                             key={index}
+                            style={{ padding: 5 }}
                             data={
                               <Text
+                                numberOfLines={1}
                                 style={{
                                   textAlign: "center",
                                   fontWeight: selected.includes(rowData.pk)

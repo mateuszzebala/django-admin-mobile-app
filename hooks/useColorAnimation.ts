@@ -1,5 +1,5 @@
 import { useRef, useMemo, useEffect, useState } from "react";
-import { Animated, Easing } from "react-native";
+import { Animated } from "react-native";
 
 export default (color: string): any[] => {
   const anim = useMemo(() => new Animated.Value(0), [color]);
