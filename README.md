@@ -1,14 +1,11 @@
 # Django Admin Mobile APP
 
-Introducing Django Admin Mobile App – the ultimate mobile application for managing your web projects on the go! Just like Django Admin. We offers a seamless interface to manage your site's data, users, and content, but with the convenience of mobile access.
+Introducing Django Admin Mobile App – the ultimate mobile application for managing your web projects on the go! Just like Django Admin. That app offers a seamless interface to manage your site's data, users, and content, but with the convenience of mobile access.
 
 With this app you can:
 
 Easily add, edit, and delete entries from any of your models.
 Manage users, permissions, and groups directly from your mobile device.
-Receive real-time notifications on critical events or changes.
-Customize the dashboard to display key metrics and insights tailored to your project needs.
-Whether you are a developer, site administrator, or content manager, AdminPro Mobile gives you full control over your web application anytime, anywhere.
 
 Feel free to let me know if you want any specific features added or if you'd like the description to be more tailored!
 
